@@ -1,8 +1,10 @@
 #!/bin/bash
-sudo mariadb
+service nginx start
+service php7.3-fpm start
+service mysql start
 mariadb -e "CREATE DATABASE wp_db;"
 mariadb -e "CREATE USER 'admin'@'localhost' IDENTIFIED BY 'admin';"
 mariadb -e "GRANT ALL ON *.* TO 'admin'@'localhost' IDENTIFIED BY 'admin';"
 mariadb -e "FLUSH PRIVILEGES;"
-sudo service php7.3-fpm.service restart
-sudo service nginx restart
+sleep infinity &
+wait

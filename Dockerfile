@@ -22,10 +22,11 @@ rm phpMyAdmin-5.0.2-all-languages.tar.gz latest.tar.gz
 COPY ./srcs/ft_server.conf /etc/nginx/sites-available/
 RUN ln -s /etc/nginx/sites-available/ft_server.conf /etc/nginx/sites-enabled/
 
-COPY ./srcs/config.inc.php /var/www/phpmyadmin
+COPY ./srcs/wp-config.php /var/www/wordpress/
+COPY ./srcs/config.inc.php /var/www/wordpress/phpmyadmin
 RUN chown -R www-data:www-data /var/www/wordpress/phpmyadmin && \
 chown -R www-data:www-data /var/www/wordpress && \
-chmod 777 -R /var/www/*
+chmod 777 -R /var/www/wordpress /var/www/wordpress/phpmyadmin
 
 #ssl
 COPY ./srcs/ssl/nginx-selfsigned.key /etc/ssl/private/
@@ -36,4 +37,6 @@ COPY ./srcs/ssl/ssl-params.conf /etc/nginx/snippets/
 
 EXPOSE 80 443
 
-CMD ["bash", "start.sh"]
+CMD ["bash", "start_w.sh"]
+#ENTRYPOINT bash ./srcs/start.sh
+#CMD ["/bin/bash", "-x", "./srcs/start.sh", "run"]
