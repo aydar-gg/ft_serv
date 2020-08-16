@@ -27,7 +27,8 @@ RUN ln -s /etc/nginx/sites-available/ft_server.conf /etc/nginx/sites-enabled/
 COPY srcs/wp-config.php /var/www/html/wordpress
 COPY srcs/config.inc.php /var/www/html/phpmyadmin
 RUN chown -R www-data:www-data /var/www/html/phpmyadmin && \
-chown -R www-data:www-data /var/www/html/wordpress
+chown -R www-data:www-data /var/www/html/wordpress && \
+chmod 660 -R /var/www/html/phpmyadmin/config.inc.php
 # chmod 777 -R /var/www/wordpress && chmod 755 -R /var/www/wordpress/phpmyadmin
 
 #ssl
